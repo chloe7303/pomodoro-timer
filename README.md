@@ -5,6 +5,7 @@
 * Vue.js
 * Vue CLI
 * Vuetify (UI Framework)
+* Node.js
 * Sass
 
 ## 功能
