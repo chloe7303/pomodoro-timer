@@ -26,7 +26,7 @@
           </v-menu>
         </v-toolbar>
 
-        <v-list-item-group>
+        <v-list-item-group class="pb-2">
           <v-list-item-title class="ml-4 mb-4">
             <v-row class="align-center">
               <v-col cols="4" class="d-flex align-center">
