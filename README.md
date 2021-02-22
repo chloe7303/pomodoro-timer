@@ -1,4 +1,4 @@
-# pomodoro
+# pomodoro-timer
 
 ## 使用技術
 
