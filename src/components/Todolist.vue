@@ -1,10 +1,10 @@
 <template>
   <v-row>
     <v-col md="6" offset-md="3">
-      <h3>Current task: {{ currentTask }}</h3>
-      <v-card color="primary mb-4">
+      <h3 class="mb-1">Current task: {{ currentTask }}</h3>
+      <v-card color="background mb-4">
         <v-system-bar color="accent"></v-system-bar>
-        <v-toolbar flat color="primary">
+        <v-toolbar flat color="background">
           <v-toolbar-title>My Tasks</v-toolbar-title>
           <v-menu bottom left>
             <template v-slot:activator="{ on, attrs }">
@@ -27,7 +27,25 @@
         </v-toolbar>
 
         <v-list-item-group>
-          <v-list-item-title class="ml-4 mb-4">show: {{ show }} ; total: {{ showLists.length }}</v-list-item-title>
+          <v-list-item-title class="ml-4 mb-4">
+            <v-row class="align-center">
+              <v-col cols="4" class="d-flex align-center">
+                <span class="mr-3">show:</span>
+                <v-select
+                  v-model="select"
+                  :items="selects"
+                  dense
+                  color="accent"
+                  hide-details
+                  outlined
+                ></v-select>
+              </v-col>
+              <v-col>
+                <span>; total: {{ showLists.length }}</span>
+              </v-col>
+            </v-row>
+            </v-list-item-title>
+            
           <v-list-item v-for="list in showLists" :key="list.id">
             <v-list-item-action>
               <v-checkbox v-model="list.done" color="accent"></v-checkbox>
@@ -100,20 +118,18 @@ export default {
     items: [
       { title: 'clear all tasks' },
       { title: 'clear finished tasks' },
-      { title: 'mark all tasks finished' },
-      { title: 'mark all tasks unfinished' },
-      { title: 'show all tasks' },
-      { title: 'show finished tasks' },
-      { title: 'show unfinished tasks' }
+      { title: 'mark all tasks complete' },
+      { title: 'mark all tasks active' }
     ],
-    show: 'all'
+    selects: ['all', 'active', 'complete'],
+    select: 'all'
   }),
   computed: {
     showLists () {
       return this.lists.filter((list) => {
-        if (this.show === 'all') return true
-        else if (this.show === 'finished' && list.done) return true
-        else if (this.show === 'unfinished' && !list.done) return true
+        if (this.select === 'all') return true
+        else if (this.select === 'active' && !list.done) return true
+        else if (this.select === 'complete' && list.done) return true
         else return false
       })
     }
@@ -164,17 +180,8 @@ export default {
             return list
           })
           break
-        case 4:
-          this.show = 'all'
-          break
-        case 5:
-          this.show = 'finished'
-          break
-        case 6:
-          this.show = 'unfinished'
-          break
         default:
-          console.log('error')
+          this.lists = []
       }
     }
   },

@@ -1,14 +1,14 @@
 <template>
   <v-row>
     <v-col md="6" offset-md="3">
-      <v-card class="mt-8" color="primary">
+      <v-card class="mt-8" color="background">
         <v-tabs v-model="currentTab" background-color="transparent" color="accent" grow @change="changeTab">
           <v-tab v-for="tab in tabs" :key="tab.name">
             {{ tab.name }}
           </v-tab>
         </v-tabs>
 
-        <v-card color="primary" flat class="py-12">
+        <v-card color="background" flat class="py-12">
           <Settings :tabs="tabs" :saveTabs="saveTabs" />
           <v-card-title class="text-center justify-center py-10">
           <h1 class="font-weight-bold timer--text pb-6">
